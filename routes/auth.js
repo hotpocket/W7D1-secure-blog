@@ -36,14 +36,16 @@ router.post('/login', async (req, res) => {
 // Route for user registration
 router.post('/register', async (req, res) => {
     const { fullname, email, password } = req.body;
-
+    // console.log("REQUEST:")
+    // console.log(req)
+    // console.log("RESPONSE")
+    // console.log(res)
     try {
         // Check if the user already exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
             return res.status(400).json({ message: 'User already exists' });
         }
-
         // Create a new user
         const newUser = new User({ fullname, email, password });
         await newUser.save();
@@ -65,6 +67,7 @@ function generateToken(user) {
     // Implement JWT token generation logic here
     // For example, you can use the jsonwebtoken package
     // Return the generated token
+    return "hi mom";
 }
 
 module.exports = router;
