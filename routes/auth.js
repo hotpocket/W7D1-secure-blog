@@ -58,7 +58,7 @@ router.post("/register", async (req, res) => {
 
 // Function to generate JWT token
 function generateToken(user) {
-  console.log(user);
+  // console.log(user);
   // Generate a JWT token using the user's information
   const token = require("jsonwebtoken").sign(
     { "id": user._id, "email": user.email },
