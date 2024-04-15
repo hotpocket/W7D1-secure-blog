@@ -1,23 +1,20 @@
-// app.js
 const express = require('express');
 const app = express();
-const userRoute = require("./routes/auth");
-const postRoute = require("./routes/posts");
-const CONNECTDB = require("./config/config");
-const PORT = process.env.PORT || 5000;
+const port = process.env.PORT || 5000
 
-// Middlewares
+// hook middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Database Connection
-CONNECTDB(process.env.MONGO_DB_URL);
+// register routes
+app.use("/api/user", require("./routes/auth"));
+app.use("/api/post", require("./routes/posts"));
 
-// Routes
-app.use("/api/user", userRoute);
-app.use("/api/post", postRoute);
-
-// Listen to the port
-app.listen(PORT, () => {
-    console.log(`Listening to port ${PORT}`);
+// start express server
+app.listen(port, () => {
+    console.log(`Express listening on port ${port}`);
 });
+
+// connect database
+const connectToMongoDB = require("./config/mongoose");
+connectToMongoDB(process.env.MONGO_DB_URL);
