@@ -1,5 +1,7 @@
 // controllers/auth.js
 
+console.log("controllers/auth.js");
+
 // Importing the jsonwebtoken package for handling JSON Web Tokens (JWTs)
 const jwt = require("jsonwebtoken");
 
