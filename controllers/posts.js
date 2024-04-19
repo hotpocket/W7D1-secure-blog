@@ -14,7 +14,7 @@ class PostController {
             // Creating a new post with the provided title, user ID, and description
             const post = await Post.create({
                 title,
-                userId: req.user.id,
+                userId: req.user._id,
                 description,
             });
 

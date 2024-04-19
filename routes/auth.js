@@ -1,9 +1,12 @@
 // Route for user login
 // routes/auth.js
 
+const { verifyToken } = require("../middleware/auth");
+
+
 const express = require("express");
 const router = express.Router();
-const { verifyToken } = require("../controllers/auth");
+// const { verifyToken } = require("../controllers/auth");
 
 // Import the User model for database operations
 const User = require("../models/user");

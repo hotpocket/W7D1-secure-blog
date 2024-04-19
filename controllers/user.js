@@ -2,6 +2,8 @@ const User = require("../models/user");
 
 // Function to handle user registration
 const Register = async (req, res) => {
+  console.log(req.body);
+  console.log(req.headers);
   const { fullname, email, password } = req.body;
   try {
     // Check if the user already exists
@@ -59,4 +61,10 @@ function generateToken(user) {
   return token;
 }
 
-  module.exports = { Register, Login };
+const wtf = async (req, res) => {
+  console.log(req.body);
+  console.log(req.headers);
+  res.json({ message: "Hello" });
+}
+
+module.exports = { Register, Login, wtf };
