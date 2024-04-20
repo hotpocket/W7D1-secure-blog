@@ -1,19 +1,16 @@
-const User = require("../models/user");
+const { userModel } = require("../models/user");
 
 // Function to handle user registration
 const Register = async (req, res) => {
-  console.log(req.body);
-  console.log(req.headers);
   const { fullname, email, password } = req.body;
   try {
-    // Check if the user already exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: "User already exists" });
+    const rec = await userModel.findOne({ email });
+    if (rec) {
+      return res.status(400).json({ message: "User already exists." });
     }
-    // Create a new user
-    const newUser = new User({ fullname, email, password });
+    const newUser = new userModel({ fullname, email, password });
     await newUser.save();
+    console.log(newUser);
 
     // Generate a JWT token
     const token = generateToken(newUser);
@@ -31,9 +28,9 @@ const Login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Find the user by email
-    const user = await User.findOne({ email });
-
+    console.log(email, password);
+    const user = await userModel.findOne({ email });
+    console.log(user);
     // If user not found or password doesn't match, return an error
     if (!user || !(await user.matchPassword(password))) {
       return res.status(401).json({ message: "Invalid email or password" });
@@ -61,10 +58,4 @@ function generateToken(user) {
   return token;
 }
 
-const wtf = async (req, res) => {
-  console.log(req.body);
-  console.log(req.headers);
-  res.json({ message: "Hello" });
-}
-
-module.exports = { Register, Login, wtf };
+module.exports = { Register, Login };

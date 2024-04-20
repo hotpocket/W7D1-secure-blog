@@ -1,20 +1,24 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 5000
 
-// hook middleware
+// env
+require('dotenv').config();
+
+// server middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// register routes
+// server routes
 app.use("/api/user", require("./routes/auth"));
 app.use("/api/post", require("./routes/posts"));
 
-// start express server
+// server start
+const port = process.env.MONGO_DB_PORT || 5000
 app.listen(port, () => {
     console.log(`Express listening on port ${port}`);
 });
 
-// connect database
-const connectToMongoDB = require("./config/mongoose");
-connectToMongoDB(process.env.MONGO_DB_URL);
+// database connect
+const mongoConnect = require("./config/mongoose");
+mongoConnect(process.env.MONGO_DB_URL);
+
