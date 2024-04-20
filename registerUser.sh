@@ -4,7 +4,7 @@ host="http://localhost:5000/api/user/register"
 
 # if $1 has a dash, generate random alpha chars between those two ranges
 # else if $1 is a number, generate that many random alpha chars
-rand(){  # error checkins is lacking  ='(
+rand(){
   genSize=$1
   has_dash='^[0-9]+-[0-9]+$'
   is_number='^[0-9]+$'
